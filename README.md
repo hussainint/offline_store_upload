@@ -11,29 +11,47 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+offline_store_upload: Stores api calls locally and uploads when needed. This package can be used in apps where offline functionality is needed.
+ 
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
+TODO:  Add longer examples
 to `/example` folder.
 
 ```dart
-const like = 'sample';
-```
 
-## Additional information
+import 'package:offline_store_upload/offline_store_upload.dart';
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+/// initialize a list
+ List<OfflineStoreUploadModel> data = [];
+
+
+/// add api calls to the list
+  data.add(
+    OfflineStoreUploadModel(
+    body: {
+      "name": "Flutter",
+      "age": 30,
+    },
+    api_url: url,
+    api_type: APITYPE.POST,
+    ),
+   );
+
+/// add api calls to the list
+
+ data.add(
+    OfflineStoreUploadModel(
+    body: {
+      "name": "Dart",
+      "age": 20,
+    },
+    api_url: url,
+    api_type: APITYPE.POST,
+    ),
+   );
+
+/// upload when needed
+OfflineStoreUpload().addData(data: data);
+    ```
