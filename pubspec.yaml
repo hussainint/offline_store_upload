@@ -1,6 +1,7 @@
 name: offline_store_upload
 description: To be able to store api calls locally and upload when needed.
 version: 0.0.1
+author: Sarwer Hussain
 homepage: https://github.com/hussainint/offline_store_upload
 
 environment:
