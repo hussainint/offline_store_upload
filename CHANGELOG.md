@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Simple offline storage and api upload for POST and PUT request.
