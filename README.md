@@ -54,4 +54,5 @@ import 'package:offline_store_upload/offline_store_upload.dart';
 
 /// upload when needed
 OfflineStoreUpload().addData(data: data);
-    ```
+
+```
