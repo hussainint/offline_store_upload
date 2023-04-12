@@ -15,44 +15,59 @@ offline_store_upload: Stores api calls locally and uploads when needed. This pac
  
 
 ## Usage
-
-TODO:  Add longer examples
-to `/example` folder.
-
+ 
 ```dart
 
-import 'package:offline_store_upload/offline_store_upload.dart';
+import 'package:offline_store_upload/offline_store_upload.dart'; 
+  
+/// Store API 
+MaterialButton(
+  child: Text('Store Api'),
+  onPressed: () {
 
-/// initialize a list
- List<OfflineStoreUploadModel> data = [];
+    /// initialize a list
+    List<OfflineStoreApi> data = [];
 
+    /// add api calls to the list
 
-/// add api calls to the list
-  data.add(
-    OfflineStoreUploadModel(
-    body: {
-      "name": "Flutter",
-      "age": 30,
-    },
-    api_url: url,
-    api_type: APITYPE.POST,
-    ),
-   );
+    data.add(
+      OfflineStoreApi(
+        api_body: {
+          "name": "Flutter",
+          "age": 30,
+        },
+        api_url: url,
+        api_type: APITYPE.POST,
+      ),
+    );
 
-/// add api calls to the list
+    /// add api calls to the list
 
- data.add(
-    OfflineStoreUploadModel(
-    body: {
-      "name": "Dart",
-      "age": 20,
-    },
-    api_url: url,
-    api_type: APITYPE.POST,
-    ),
-   );
+    data.add(
+      OfflineStoreApi(
+        api_body: {
+          "name": "Dart",
+          "age": 55,
+        },
+        api_url: url,
+        api_type: APITYPE.PUT,
+      ),
+    );
 
-/// upload when needed
-OfflineStoreUpload().addData(data: data);
+    /// upload when needed
+
+    OfflineStoreUpload().addData(api_data: data);
+  },
+),
+
+/// Upload Api
+MaterialButton(
+  child: Text('UPLOAD API'),
+  onPressed: () {
+
+    /// Use this function to upload the locally stored api when needed
+    OfflineStoreUpload().upload(token: '');
+  },
+),
 
 ```

@@ -35,10 +35,10 @@ class UploadExample extends StatelessWidget {
             MaterialButton(
               child: Text('POST 1'),
               onPressed: () {
-                List<OfflineStoreUploadModel> data = [];
+                List<OfflineStoreApi> data = [];
                 data.add(
-                  OfflineStoreUploadModel(
-                    body: {
+                  OfflineStoreApi(
+                    api_body: {
                       "name": "Hussain",
                       "age": 22,
                     },
@@ -46,7 +46,7 @@ class UploadExample extends StatelessWidget {
                     api_type: APITYPE.POST,
                   ),
                 );
-                OfflineStoreUpload().addData(data: data);
+                OfflineStoreUpload().addData(api_data: data);
               },
             ),
             SizedBox(height: 20),
@@ -55,10 +55,10 @@ class UploadExample extends StatelessWidget {
             MaterialButton(
               child: Text('POST 2'),
               onPressed: () {
-                List<OfflineStoreUploadModel> data = [];
+                List<OfflineStoreApi> data = [];
                 data.add(
-                  OfflineStoreUploadModel(
-                    body: {
+                  OfflineStoreApi(
+                    api_body: {
                       "name": "Flutter",
                       "age": 30,
                     },
@@ -67,8 +67,8 @@ class UploadExample extends StatelessWidget {
                   ),
                 );
                 data.add(
-                  OfflineStoreUploadModel(
-                    body: {
+                  OfflineStoreApi(
+                    api_body: {
                       "name": "Dart",
                       "age": 55,
                     },
@@ -76,7 +76,7 @@ class UploadExample extends StatelessWidget {
                     api_type: APITYPE.POST,
                   ),
                 );
-                OfflineStoreUpload().addData(data: data);
+                OfflineStoreUpload().addData(api_data: data);
               },
             ),
             SizedBox(height: 20),
@@ -85,10 +85,10 @@ class UploadExample extends StatelessWidget {
             MaterialButton(
               child: Text('PUT 1'),
               onPressed: () {
-                List<OfflineStoreUploadModel> data = [];
+                List<OfflineStoreApi> data = [];
                 data.add(
-                  OfflineStoreUploadModel(
-                    body: {
+                  OfflineStoreApi(
+                    api_body: {
                       "name": "Hussain",
                       "age": 20,
                     },
@@ -96,7 +96,7 @@ class UploadExample extends StatelessWidget {
                     api_type: APITYPE.PUT,
                   ),
                 );
-                OfflineStoreUpload().addData(data: data);
+                OfflineStoreUpload().addData(api_data: data);
               },
             ),
             SizedBox(height: 20),

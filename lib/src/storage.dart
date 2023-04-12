@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:offline_store_upload/src/OfflineStoreUploadModel.dart';
-import 'package:offline_store_upload/src/network/apiUpload.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:dio/dio.dart';
+
+import '../offline_store_upload.dart';
 
 class OfflineStoreUpload {
   /// to get the local directory path
@@ -31,25 +30,28 @@ class OfflineStoreUpload {
       print(contents);
       return contents;
     } catch (e) {
-      // If encountering an error, return 0
+      // If encountering an error, return ''
       return '';
     }
   }
 
   /// add new api request in queue in local file
+  ///
+  /// if data alredy exist in file, then
+  /// add old data and new data then convert the whole into map and store it into file
   Future<void> addData({
-    required List<OfflineStoreUploadModel> data,
+    required List<OfflineStoreApi> api_data,
   }) async {
     String k = await OfflineStoreUpload().readData();
 
-    List<OfflineStoreUploadModel> olddata = [];
+    List<OfflineStoreApi> olddata = [];
     if (k.trim() != '') {
-      olddata = offlineStoreUploadModelFromJson(k);
+      olddata = offlineStoreApiFromJson(k);
     }
 
     ///
-    List<OfflineStoreUploadModel> newdata = olddata + data;
-    String newDataToStore = offlineStoreUploadModelToJson(newdata);
+    List<OfflineStoreApi> newdata = olddata + api_data;
+    String newDataToStore = offlineStoreApiToJson(newdata);
 
     ///
     final file = await _localFile;
@@ -59,12 +61,17 @@ class OfflineStoreUpload {
     return;
   }
 
+  /// uploads the api
+  ///
+  /// if api request returns error then it is store back in the file
+  ///
+  /// if no error, then that particular api call is removed from the file
   Future<void> upload({required String token}) async {
     String k = await OfflineStoreUpload().readData();
     if (k.trim() == '') return;
-    List<OfflineStoreUploadModel> l = offlineStoreUploadModelFromJson(k);
+    List<OfflineStoreApi> l = offlineStoreApiFromJson(k);
 
-    List<OfflineStoreUploadModel> notUploaded = [];
+    List<OfflineStoreApi> notUploaded = [];
     for (var i = 0; i < l.length; i++) {
       Response? status = await ApiService().upload(l[i], token);
 
@@ -75,9 +82,10 @@ class OfflineStoreUpload {
     }
 
     await clear();
-    if (notUploaded.isNotEmpty) await addData(data: notUploaded);
+    if (notUploaded.isNotEmpty) await addData(api_data: notUploaded);
   }
 
+  /// clear all the data in the file
   Future<void> clear() async {
     final file = await _localFile;
 
@@ -86,6 +94,7 @@ class OfflineStoreUpload {
     return;
   }
 
+  /// returns status is there is data present in the local file
   Future<bool> hasDataToUpload() async {
     String k = await OfflineStoreUpload().readData();
     if (k.trim() == '') return false;
